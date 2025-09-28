@@ -88,7 +88,7 @@ def render_video(config: ConversionConfig) -> Path:
     logger.info("Writing video to %s", output_path)
     final_duration = 0.0
     try:
-        with temporary_directory(output_path.parent):
+        with temporary_directory(output_path.parent) as temp_root:
             video_clip.write_videofile(
                 str(output_path),
                 codec="libx264",
@@ -96,6 +96,7 @@ def render_video(config: ConversionConfig) -> Path:
                 fps=config.frame_rate,
                 preset="medium",
                 logger=None,
+                temp_audiofile_path=str(temp_root),
             )
             final_duration = video_clip.duration or 0.0
     finally:
