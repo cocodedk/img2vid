@@ -70,6 +70,7 @@ def render_video(config: ConversionConfig) -> Path:
                 method="compose",
                 padding=-transition_seconds if transition_seconds > 0 else 0,
             ).with_fps(config.frame_rate)
+            start_clip.close()
 
         end_clip = create_text_overlay_clip(
             text=config.end_text,
@@ -89,6 +90,7 @@ def render_video(config: ConversionConfig) -> Path:
                 padding=0,
             ).with_fps(config.frame_rate)
             tail_fade_seconds = max(text_duration_seconds, transition_seconds)
+            end_clip.close()
 
         if config.audio_path:
             logger.info("Attaching audio track: %s", config.audio_path.name)
