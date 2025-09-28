@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Tuple
+from typing import Optional, Tuple
 
 from moviepy.audio.fx import AudioFadeIn, AudioFadeOut, AudioLoop
 from moviepy.audio.io.AudioFileClip import AudioFileClip
@@ -15,6 +15,7 @@ def attach_audio(
     video_clip,
     audio_path: Path,
     transition_ms: int,
+    tail_fade_seconds: Optional[float] = None,
 ) -> Tuple[object, Tuple[object, ...]]:
     """Attach audio to ``video_clip`` and return the clip plus resources to close."""
 
@@ -38,14 +39,24 @@ def attach_audio(
     else:
         working_audio = audio_clip.subclipped(0, video_duration)
 
-    fade_duration = transition_duration if transition_duration > 0 else min(
+    fade_in_duration = transition_duration if transition_duration > 0 else min(
         0.5, video_duration / 10
     )
-    fade_duration = min(fade_duration, max(video_duration / 4, 0.0))
-    if fade_duration > 0:
-        working_audio = working_audio.with_effects(
-            [AudioFadeIn(fade_duration), AudioFadeOut(fade_duration)]
-        )
+    fade_in_duration = min(fade_in_duration, max(video_duration / 4, 0.0))
+
+    fade_out_duration = (
+        min(max(tail_fade_seconds or 0.0, 0.0), video_duration / 2)
+        if tail_fade_seconds is not None
+        else fade_in_duration
+    )
+
+    fade_effects = []
+    if fade_in_duration > 0:
+        fade_effects.append(AudioFadeIn(fade_in_duration))
+    if fade_out_duration > 0:
+        fade_effects.append(AudioFadeOut(fade_out_duration))
+    if fade_effects:
+        working_audio = working_audio.with_effects(fade_effects)
 
     video_clip = video_clip.with_audio(working_audio)
 

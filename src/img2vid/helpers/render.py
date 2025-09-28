@@ -65,6 +65,7 @@ def render_video(config: ConversionConfig) -> Path:
         text_color=config.text_color,
         bg_color=config.text_bg_color,
     )
+    tail_fade_seconds = None
     if end_clip is not None:
         logger.info("Applying end text overlay")
         video_clip = concatenate_videoclips(
@@ -72,6 +73,7 @@ def render_video(config: ConversionConfig) -> Path:
             method="compose",
             padding=0,
         ).with_fps(config.frame_rate)
+        tail_fade_seconds = max(text_duration_seconds, transition_seconds)
 
     audio_resources: Sequence[object] = ()
     if config.audio_path:
@@ -80,6 +82,7 @@ def render_video(config: ConversionConfig) -> Path:
             video_clip=video_clip,
             audio_path=config.audio_path,
             transition_ms=config.transition_ms,
+            tail_fade_seconds=tail_fade_seconds,
         )
 
     output_path = config.output_video
