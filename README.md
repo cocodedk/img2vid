@@ -25,12 +25,12 @@ uv pip install -e .
 ```bash
 img2vid \
   --input-dir ./assets/images \
-  --output-video ./build/output.mp4 \
   --audio ./assets/soundtrack.mp3 \
   --frame-duration-ms 3000 \
   --transition-ms 500 \
   --start-text "Project Unity" \
   --end-text "Thanks for watching" \
+  --output-name project-unity \
   --text-duration-ms 2000
 ```
 
@@ -40,6 +40,11 @@ Logs will display processing progress plus the final runtime. The command exits 
 - `--start-text` and `--end-text` add title/credits cards that fade in/out using the configured transition duration.
 - Customize typographic styling with `--text-font`, `--text-font-size`, `--text-color`, and `--text-bg-color`.
 - Use `--text-duration-ms` to control how long each overlay remains on screen (defaults to 2000 ms).
+
+### Output Versioning
+- By default, videos are written to `build/<input-folder>/v###/<basename>.mp4`. The first unused version number is selected automatically.
+- Override the root directory with `--output-dir` (default `build`) or provide a fully qualified path with `--output-video`.
+- Control the filename (without extension) via `--output-name`; when omitted the input folder name is used.
 
 ## Flask Service
 ```bash

@@ -12,6 +12,7 @@ from .converter import (
     DEFAULT_TEXT_DURATION_MS,
     ConversionConfig,
     ConversionError,
+    resolve_output_path,
     render_video,
 )
 
@@ -25,9 +26,24 @@ def create_app() -> Flask:
     def render_endpoint():
         payload: Dict[str, Any] = request.get_json(force=True, silent=True) or {}
         try:
+            input_dir = Path(payload["input_dir"])
+            explicit_output = (
+                Path(payload["output_video"])
+                if payload.get("output_video")
+                else None
+            )
+            output_video = resolve_output_path(
+                input_dir=input_dir,
+                explicit_output=explicit_output,
+                output_root=Path(payload["output_dir"])
+                if payload.get("output_dir")
+                else None,
+                output_basename=payload.get("output_name"),
+            )
+
             config = ConversionConfig(
-                input_dir=Path(payload["input_dir"]),
-                output_video=Path(payload["output_video"]),
+                input_dir=input_dir,
+                output_video=output_video,
                 audio_path=Path(payload["audio"]) if payload.get("audio") else None,
                 frame_duration_ms=int(payload.get("frame_duration_ms", 3000)),
                 transition_ms=int(payload.get("transition_ms", 500)),

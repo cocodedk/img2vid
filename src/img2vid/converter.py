@@ -9,6 +9,7 @@ from .helpers import (
     ConversionConfig,
     ConversionError,
     list_image_files,
+    resolve_output_path,
     render_video,
 )
 
@@ -19,5 +20,6 @@ __all__ = [
     "ConversionConfig",
     "ConversionError",
     "list_image_files",
+    "resolve_output_path",
     "render_video",
 ]
