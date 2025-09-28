@@ -12,6 +12,7 @@ from .audio import attach_audio
 from .config import ConversionConfig
 from .images import build_video_clip, list_image_files
 from .overlays import create_text_overlay_clip
+from .tempfiles import temporary_directory
 
 logger = logging.getLogger(__name__)
 
@@ -87,21 +88,28 @@ def render_video(config: ConversionConfig) -> Path:
     logger.info("Writing video to %s", output_path)
     final_duration = 0.0
     try:
-        video_clip.write_videofile(
-            str(output_path),
-            codec="libx264",
-            audio_codec="aac" if config.audio_path else None,
-            fps=config.frame_rate,
-            preset="medium",
-            logger=None,
-        )
-        final_duration = video_clip.duration or 0.0
+        with temporary_directory(output_path.parent):
+            video_clip.write_videofile(
+                str(output_path),
+                codec="libx264",
+                audio_codec="aac" if config.audio_path else None,
+                fps=config.frame_rate,
+                preset="medium",
+                logger=None,
+            )
+            final_duration = video_clip.duration or 0.0
     finally:
         video_clip.close()
         for resource in audio_resources:
             close_method = getattr(resource, "close", None)
             if callable(close_method):
                 close_method()
+
+    for temp_file in output_path.parent.glob("*TEMP_MPY_*"):
+        try:
+            temp_file.unlink()
+        except FileNotFoundError:
+            continue
 
     logger.info("Render complete. Total duration: %.2f seconds", final_duration)
     return output_path

@@ -10,6 +10,7 @@ from .config import (
 from .images import build_video_clip, list_image_files
 from .audio import attach_audio
 from .output_paths import resolve_output_path
+from .tempfiles import temporary_directory
 from .render import render_video
 
 __all__ = [
@@ -23,4 +24,5 @@ __all__ = [
     "list_image_files",
     "render_video",
     "resolve_output_path",
+    "temporary_directory",
 ]

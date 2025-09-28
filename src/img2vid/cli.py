@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import logging
+import signal
 import sys
 from pathlib import Path
 from typing import Iterable, Optional
@@ -133,6 +134,15 @@ def main(argv: Optional[Iterable[str]] = None) -> int:
     _configure_logging(args.log_level)
     logging.info("Starting conversion run")
 
+    def _handle_termination(signum, _frame):
+        raise KeyboardInterrupt
+
+    for sig in (signal.SIGINT, signal.SIGTERM):
+        try:
+            signal.signal(sig, _handle_termination)
+        except (ValueError, OSError):  # pragma: no cover - not supported on all platforms
+            continue
+
     output_video = resolve_output_path(
         input_dir=args.input_dir,
         explicit_output=args.output_video,
@@ -158,6 +168,9 @@ def main(argv: Optional[Iterable[str]] = None) -> int:
 
     try:
         output_path = render_video(config)
+    except KeyboardInterrupt:
+        logging.warning("Render cancelled by user")
+        return 130
     except ConversionError as exc:
         logging.error("Conversion failed: %s", exc)
         return 1
