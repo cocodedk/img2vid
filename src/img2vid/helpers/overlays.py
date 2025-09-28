@@ -35,19 +35,18 @@ def _fallback_text_clip(
         font = ImageFont.load_default()
 
     text_lines = text.splitlines() or [text]
-    metrics = []
-    for line in text_lines:
-        bbox = draw.textbbox((0, 0), line, font=font)
-        metrics.append((bbox[2] - bbox[0], bbox[3] - bbox[1]))
-
-    max_line_height = max((m[1] for m in metrics), default=font_size)
-    total_text_height = sum((m[1] for m in metrics)) + max(0, len(text_lines) - 1) * 8
-
-    current_y = (height - total_text_height) / 2
+    line_metrics = []
     for line in text_lines:
         bbox = draw.textbbox((0, 0), line, font=font)
         line_width = bbox[2] - bbox[0]
         line_height = bbox[3] - bbox[1]
+        line_metrics.append((line, line_width, line_height))
+
+    max_line_height = max((m[2] for m in line_metrics), default=font_size)
+    total_text_height = sum((m[2] for m in line_metrics)) + max(0, len(line_metrics) - 1) * 8
+
+    current_y = (height - total_text_height) / 2
+    for line, line_width, line_height in line_metrics:
         position = ((width - line_width) / 2, current_y)
         draw.text(position, line, font=font, fill=text_color, align="center")
         current_y += line_height + 8

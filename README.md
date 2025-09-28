@@ -34,6 +34,20 @@ img2vid \
   --text-duration-ms 2000
 ```
 
+### CLI Real Example
+
+```bash
+UV_CACHE_DIR=.uv-cache img2vid \
+--input-dir ./files/20250928-unity-foundation \
+--audio "./files/20250928-unity-foundation/Gibran Alcocer - Idea 9 (Slowed + Reverb).mp3" \
+--frame-duration-ms 3000 \
+--transition-ms 500 \
+--start-text "Unity Foundation - September 2025" \
+--end-text "Thank you for all your donations and generocities" \
+--text-duration-ms 5000 \
+--log-level INFO
+```
+
 Logs will display processing progress plus the final runtime. The command exits with a non-zero status when validation fails.
 
 ### Overlay Options
