@@ -1,0 +1,12 @@
+[project]
+name = "img2vid"
+version = "0.1.0"
+dependencies = [
+    "moviepy>=2.1",
+    "Flask>=3.0.0",
+]
+requires-python = ">=3.12"
+description = "CLI and Flask app for converting image folders into crossfaded videos with audio"
+
+[project.scripts]
+img2vid = "img2vid.cli:main"
