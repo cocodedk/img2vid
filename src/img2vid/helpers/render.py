@@ -47,6 +47,7 @@ def render_video(config: ConversionConfig) -> Path:
         bg_color=config.text_bg_color,
     )
     if start_clip is not None:
+        logger.info("Applying start text overlay")
         video_clip = concatenate_videoclips(
             [start_clip, video_clip],
             method="compose",
@@ -64,6 +65,7 @@ def render_video(config: ConversionConfig) -> Path:
         bg_color=config.text_bg_color,
     )
     if end_clip is not None:
+        logger.info("Applying end text overlay")
         video_clip = concatenate_videoclips(
             [video_clip, end_clip],
             method="compose",

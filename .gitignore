@@ -29,3 +29,4 @@ Thumbs.db
 # Cursor / AI tooling
 .cursor/
 files/
+*.mp4

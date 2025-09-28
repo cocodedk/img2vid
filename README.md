@@ -2,6 +2,8 @@
 
 Command-line and Flask tooling for converting ordered image folders into MP4 slideshows with soundtrack support.
 
+**Created by [Babak Bandpey](https://cocode.dk) - [cocode.dk](https://cocode.dk)**
+
 ## Prerequisites
 - [uv](https://github.com/astral-sh/uv) 0.2.0 or newer
 - Python 3.12 (managed via `uv`)
@@ -46,3 +48,15 @@ python -m flask --app img2vid.flask_app:create_app run --debug
 ```
 
 Send a POST request to `http://localhost:5000/render` with JSON parameters matching the CLI flags to trigger a conversion.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Creator
+
+**Babak Bandpey**
+Website: [cocode.dk](https://cocode.dk)
+Email: [Contact via cocode.dk](https://cocode.dk)
+
+This project is part of the cocode.dk development portfolio, showcasing practical Python tools for multimedia processing.

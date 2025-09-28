@@ -33,8 +33,18 @@ def _build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--output-video",
         type=Path,
-        required=True,
-        help="Target path for the generated MP4 file",
+        help="Explicit target path for the generated video",
+    )
+    parser.add_argument(
+        "--output-dir",
+        type=Path,
+        default=Path("build"),
+        help="Root folder where versioned outputs are stored (default: build)",
+    )
+    parser.add_argument(
+        "--output-name",
+        type=str,
+        help="Base filename (without extension) for the generated video",
     )
     parser.add_argument(
         "--audio",
@@ -122,9 +132,16 @@ def main(argv: Optional[Iterable[str]] = None) -> int:
     _configure_logging(args.log_level)
     logging.info("Starting conversion run")
 
+    output_video = resolve_output_path(
+        input_dir=args.input_dir,
+        explicit_output=args.output_video,
+        output_root=args.output_dir,
+        output_basename=args.output_name,
+    )
+
     config = ConversionConfig(
         input_dir=args.input_dir,
-        output_video=args.output_video,
+        output_video=output_video,
         audio_path=args.audio,
         frame_duration_ms=args.frame_duration_ms,
         transition_ms=args.transition_ms,
