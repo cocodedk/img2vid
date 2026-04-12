@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>img2vid — Convert Images to Crossfaded Video Slideshows</title>
+  <meta name="description" content="img2vid is a free, open-source Python tool to convert image folders into MP4 slideshows with crossfade transitions and audio soundtrack support. CLI and web UI." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://cocodedk.github.io/img2vid/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="img2vid — Images to Video Converter" />
+  <meta property="og:description" content="Convert image folders into crossfaded MP4 slideshows with audio. Free, open-source, Python." />
+  <meta property="og:url" content="https://cocodedk.github.io/img2vid/" />
+  <meta property="og:image" content="https://cocodedk.github.io/img2vid/og.png" />
+  <meta property="og:locale" content="en_US" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="img2vid — Images to Video Converter" />
+  <meta name="twitter:image" content="https://cocodedk.github.io/img2vid/og.png" />
+  <link rel="alternate" hreflang="en" href="https://cocodedk.github.io/img2vid/" />
+  <link rel="alternate" hreflang="fa" href="https://cocodedk.github.io/img2vid/fa/" />
+  <link rel="alternate" hreflang="x-default" href="https://cocodedk.github.io/img2vid/" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "img2vid",
+    "description": "Convert ordered image folders into MP4 slideshows with crossfade transitions and audio soundtrack support.",
+    "url": "https://cocodedk.github.io/img2vid/",
+    "downloadUrl": "https://github.com/cocodedk/img2vid/releases/latest/download/img2vid.zip",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Linux, macOS, Windows",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "author": {
+      "@type": "Person",
+      "name": "Babak Bandpey",
+      "url": "https://cocode.dk",
+      "sameAs": ["https://linkedin.com/in/babakbandpey", "https://github.com/cocodedk"]
+    },
+    "codeRepository": "https://github.com/cocodedk/img2vid"
+  }
+  </script>
+</head>
+<body>
+  <header>
+    <span class="logo">img2vid</span>
+    <nav>
+      <a href="https://github.com/cocodedk/img2vid" target="_blank" rel="noreferrer">GitHub</a>
+      <a href="fa/" class="lang-switch">فارسی</a>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <h1>img2vid</h1>
+    <p>Convert ordered image folders into crossfaded MP4 slideshows with optional audio soundtrack. Free, open-source, and works from CLI or web UI.</p>
+    <a href="https://github.com/cocodedk/img2vid/releases/latest/download/img2vid.zip" class="btn">Download Latest</a>
+  </div>
+
+  <main>
+    <section>
+      <h2>Features</h2>
+      <ul>
+        <li><strong>Crossfade transitions</strong> — Smooth fade between images</li>
+        <li><strong>Audio support</strong> — Add a soundtrack to your slideshow</li>
+        <li><strong>CLI + Web UI</strong> — Use from terminal or browser</li>
+        <li><strong>Ordered output</strong> — Images sorted alphabetically for consistent results</li>
+        <li><strong>MP4 output</strong> — Standard H.264 video compatible everywhere</li>
+        <li><strong>Python-native</strong> — Built on moviepy, no proprietary tools needed</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Quick Start</h2>
+      <pre><code>pip install uv
+uv sync
+uv run img2vid --help</code></pre>
+    </section>
+
+    <section>
+      <h2>Architecture</h2>
+      <table>
+        <tr><th>Component</th><th>Technology</th></tr>
+        <tr><td>Video conversion</td><td>moviepy 2.1</td></tr>
+        <tr><td>CLI</td><td>Click (via pyproject.toml)</td></tr>
+        <tr><td>Web UI</td><td>Flask 3.0</td></tr>
+        <tr><td>Language</td><td>Python 3.12</td></tr>
+        <tr><td>License</td><td>Apache-2.0</td></tr>
+      </table>
+    </section>
+
+    <section>
+      <h2>Author</h2>
+      <p><strong>Babak Bandpey</strong> — <a href="https://cocode.dk" target="_blank" rel="noreferrer">cocode.dk</a> | <a href="https://linkedin.com/in/babakbandpey" target="_blank" rel="noreferrer">LinkedIn</a> | <a href="https://github.com/cocodedk" target="_blank" rel="noreferrer">GitHub</a></p>
+    </section>
+  </main>
+
+  <footer>
+    <p>Apache-2.0 &nbsp;|&nbsp; © 2026 <a href="https://cocode.dk" target="_blank" rel="noreferrer">Cocode</a> &nbsp;|&nbsp; Created by <a href="https://linkedin.com/in/babakbandpey" target="_blank" rel="noreferrer">Babak Bandpey</a></p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,31 @@
+# img2vid
+
+> A Python CLI and Flask tool for converting image folders into crossfaded MP4 videos with audio soundtrack support.
+
+## Overview
+
+img2vid takes an ordered folder of images and converts them into a video slideshow with configurable crossfade transitions and optional audio overlay.
+
+## Links
+
+- GitHub: https://github.com/cocodedk/img2vid
+- Website (EN): https://cocodedk.github.io/img2vid/
+- Website (FA): https://cocodedk.github.io/img2vid/fa/
+- Download: https://github.com/cocodedk/img2vid/releases/latest/download/img2vid.zip
+- Author: https://cocode.dk
+- LinkedIn: https://linkedin.com/in/babakbandpey
+
+## Technical Details
+
+- Language: Python 3.12
+- Package manager: uv
+- Frameworks: Flask 3.0 (web), Click (CLI), moviepy (video)
+- License: Apache-2.0
+
+## Key Files
+
+- `src/img2vid/` — Core package
+- `src/img2vid/converter.py` — Video conversion logic
+- `src/img2vid/cli.py` — CLI entry point
+- `pyproject.toml` — Project configuration
+- `CLAUDE.md` — AI session instructions
